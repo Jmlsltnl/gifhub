@@ -1,0 +1,30 @@
+{
+  "Header": {
+    "search": "Başlık, etiket veya kategoriye göre GIF ara…",
+    "submit": "GIF Gönder",
+    "language": "Dil"
+  },
+  "Hero": {
+    "title": "Profesyoneller için oluşturulmuş GIF kütüphanesi",
+    "subtitle": "Her iş anı için mükemmel tepki GIF'ini keşfedin, paylaşın ve indirin."
+  },
+  "Sidebar": {
+    "title": "Kategoriye Göre Göz At"
+  },
+  "Sections": {
+    "featured": "Öne Çıkan GIF'ler",
+    "latest": "En Yeni GIF'ler"
+  },
+  "Gif": {
+    "copyLink": "Bağlantıyı Kopyala",
+    "download": "İndir",
+    "views": "görüntülenme",
+    "likes": "beğeni"
+  },
+  "Footer": {
+    "copyright": "© 2026 GifHub.App. Jamil Sultanli tarafından yapıldı.",
+    "company": "Şirket",
+    "community": "Topluluk",
+    "github": "GitHub"
+  }
+}

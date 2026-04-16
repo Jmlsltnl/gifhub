@@ -1,0 +1,30 @@
+{
+  "Header": {
+    "search": "Search GIFs by title, tag, or category…",
+    "submit": "Submit GIF",
+    "language": "Language"
+  },
+  "Hero": {
+    "title": "The GIF library built for professionals",
+    "subtitle": "Discover, share, and download the perfect reaction GIF for every workplace moment."
+  },
+  "Sidebar": {
+    "title": "Browse by Category"
+  },
+  "Sections": {
+    "featured": "Featured GIFs",
+    "latest": "Latest GIFs"
+  },
+  "Gif": {
+    "copyLink": "Copy Link",
+    "download": "Download",
+    "views": "views",
+    "likes": "likes"
+  },
+  "Footer": {
+    "copyright": "© 2026 GifHub.App. Built by Jamil Sultanli.",
+    "company": "Company",
+    "community": "Community",
+    "github": "GitHub"
+  }
+}
