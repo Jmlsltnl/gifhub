@@ -102,36 +102,44 @@ export default async function GifPage({ params }: Props) {
 
       <div className="mx-auto w-full max-w-6xl px-4 py-6 pb-20 sm:px-6 sm:pb-6">
         {/* Breadcrumbs */}
-        <nav className="mb-6 flex items-center gap-1 text-sm text-muted-foreground">
-          <Link href="/" className="transition-colors hover:text-foreground">Home</Link>
-          <ChevronRight size={12} />
+        <nav className="mb-6 flex items-center gap-1 overflow-x-auto text-sm text-muted-foreground">
+          <Link href="/" className="shrink-0 transition-colors hover:text-foreground">Home</Link>
+          <ChevronRight size={12} className="shrink-0" />
           {gif.categorySlug && (
             <>
-              <Link href={`/category/${gif.categorySlug}`} className="capitalize transition-colors hover:text-foreground">
+              <Link href={`/category/${gif.categorySlug}`} className="shrink-0 capitalize transition-colors hover:text-foreground">
                 {gif.categorySlug.replace(/-/g, ' ')}
               </Link>
-              <ChevronRight size={12} />
+              <ChevronRight size={12} className="shrink-0" />
             </>
           )}
           <span className="truncate font-medium text-foreground">{gif.title}</span>
         </nav>
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
+        <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
           {/* Main GIF */}
-          <div>
+          <div className="min-w-0 flex-1">
             <div className="overflow-hidden rounded-2xl bg-muted dark:bg-black/40">
               {isVideo ? (
-                <video src={gif.url} autoPlay loop muted playsInline className="w-full" />
+                <video src={gif.url} autoPlay loop muted playsInline className="max-h-[70vh] w-full object-contain" />
               ) : (
-                <div className="relative aspect-video w-full">
-                  <Image src={gif.url} alt={gif.altText} fill className="object-contain" unoptimized priority />
+                <div className="relative w-full" style={{ paddingBottom: '56.25%', maxHeight: '70vh' }}>
+                  <Image
+                    src={gif.url}
+                    alt={gif.altText}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 700px"
+                    unoptimized
+                    priority
+                  />
                 </div>
               )}
             </div>
 
             {/* Title & Stats */}
             <div className="mt-5">
-              <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{gif.title}</h1>
+              <h1 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">{gif.title}</h1>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{gif.altText}</p>
 
               <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
@@ -155,7 +163,7 @@ export default async function GifPage({ params }: Props) {
             {/* Tags */}
             {gif.tags.length > 0 && (
               <div className="mt-5 flex flex-wrap items-center gap-2">
-                <Tag size={13} className="text-muted-foreground" />
+                <Tag size={13} className="shrink-0 text-muted-foreground" />
                 {gif.tags.map((tag) => (
                   <Link key={tag} href={`/search?q=${encodeURIComponent(tag)}`}>
                     <span className="inline-block rounded-lg bg-muted px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary dark:bg-muted/60">
@@ -165,11 +173,37 @@ export default async function GifPage({ params }: Props) {
                 ))}
               </div>
             )}
+
+            {/* Mobile Actions (shown below GIF on small screens) */}
+            <div className="mt-6 space-y-4 lg:hidden">
+              <div className="rounded-2xl border border-border bg-card p-4">
+                <h3 className="mb-3 text-sm font-semibold">Actions</h3>
+                <div className="flex flex-wrap gap-2">
+                  <GifActions gifId={gif.id} url={gifUrl} gifSrc={gif.url} title={gif.title} />
+                  <FavoriteButton gifId={gif.id} />
+                  <AddToCollection gifId={gif.id} />
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-border bg-card p-4">
+                <h3 className="mb-3 text-sm font-semibold">Share to Workspace</h3>
+                <BusinessShare gifUrl={gif.url} pageUrl={gifUrl} title={gif.title} />
+              </div>
+
+              <div className="rounded-2xl border border-border bg-card p-4">
+                <h3 className="mb-3 text-sm font-semibold">GIF Details</h3>
+                <GifInfoPanel gifUrl={gif.url} title={gif.title} />
+              </div>
+
+              <div className="rounded-2xl border border-border bg-card p-4">
+                <h3 className="mb-3 text-sm font-semibold">Embed</h3>
+                <EmbedCode gifUrl={gif.url} gifTitle={gif.title} pageUrl={gifUrl} />
+              </div>
+            </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-5">
-            {/* Actions */}
+          {/* Desktop Sidebar */}
+          <div className="hidden w-[340px] shrink-0 space-y-5 lg:block">
             <div className="rounded-2xl border border-border bg-card p-5">
               <h3 className="mb-4 text-sm font-semibold">Actions</h3>
               <div className="flex flex-wrap gap-2">
@@ -179,19 +213,16 @@ export default async function GifPage({ params }: Props) {
               </div>
             </div>
 
-            {/* Business Share */}
             <div className="rounded-2xl border border-border bg-card p-5">
               <h3 className="mb-3 text-sm font-semibold">Share to Workspace</h3>
               <BusinessShare gifUrl={gif.url} pageUrl={gifUrl} title={gif.title} />
             </div>
 
-            {/* GIF Info */}
             <div className="rounded-2xl border border-border bg-card p-5">
               <h3 className="mb-3 text-sm font-semibold">GIF Details</h3>
               <GifInfoPanel gifUrl={gif.url} title={gif.title} />
             </div>
 
-            {/* Embed */}
             <div className="rounded-2xl border border-border bg-card p-5">
               <h3 className="mb-3 text-sm font-semibold">Embed</h3>
               <EmbedCode gifUrl={gif.url} gifTitle={gif.title} pageUrl={gifUrl} />

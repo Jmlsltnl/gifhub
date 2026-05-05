@@ -15,6 +15,7 @@ export interface SiteSettings {
   ga_measurement_id: string
   search_console_verification: string
   custom_head_scripts: string
+  custom_body_scripts: string
   enabled_locales: string[]
   default_locale: string
   seo_title: string
@@ -37,6 +38,7 @@ const DEFAULTS: SiteSettings = {
   ga_measurement_id: '',
   search_console_verification: '',
   custom_head_scripts: '',
+  custom_body_scripts: '',
   enabled_locales: ['en'],
   default_locale: 'en',
   seo_title: 'GifHub — Professional GIFs for Business Communication',

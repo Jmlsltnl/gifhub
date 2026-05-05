@@ -1101,7 +1101,13 @@ function SettingsTab({ secret }: { secret: string }) {
           <div>
             <Label>Custom Head Scripts</Label>
             <Textarea value={settings.custom_head_scripts ?? ''} onChange={(e) => update('custom_head_scripts', e.target.value)} className="mt-1 font-mono text-xs" rows={5} placeholder="<!-- Any custom HTML/JS to inject into <head> -->" />
-            <p className="mt-1 text-xs text-muted-foreground">Raw HTML injected into &lt;head&gt;. Use for additional tracking pixels, verification tags, etc.</p>
+            <p className="mt-1 text-xs text-muted-foreground">Raw HTML injected into &lt;head&gt;. Use for verification tags, preload hints, etc.</p>
+          </div>
+          <Separator />
+          <div>
+            <Label>Custom Body Scripts</Label>
+            <Textarea value={settings.custom_body_scripts ?? ''} onChange={(e) => update('custom_body_scripts', e.target.value)} className="mt-1 font-mono text-xs" rows={5} placeholder="<!-- Any custom HTML/JS to inject before </body> -->" />
+            <p className="mt-1 text-xs text-muted-foreground">Raw HTML injected before &lt;/body&gt;. Use for chat widgets, tracking pixels, remarketing tags, etc.</p>
           </div>
         </CardContent>
       </Card>

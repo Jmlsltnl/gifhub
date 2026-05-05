@@ -145,6 +145,11 @@ export default async function LocaleLayout({ children, params }: Props) {
             </ToastProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
+
+        {/* Custom Body Scripts */}
+        {settings.custom_body_scripts && (
+          <div dangerouslySetInnerHTML={{ __html: settings.custom_body_scripts }} />
+        )}
       </body>
     </html>
   )
